@@ -1,4 +1,4 @@
 ---
 
 sites_directory: /var/www
-site_index_url: https://raw.githubusercontent.com/shuzeo/urban-palm-tree/main/site/index.php
+site_index_url: https://raw.githubusercontent.com/shuzeo/deployment-stand/main/site/index.php
