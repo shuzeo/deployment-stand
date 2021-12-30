@@ -1,0 +1,40 @@
+---
+
+- name: Install required packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - apache2
+    - php
+
+- name: Select default virtual host
+  find:
+    paths:
+      - /etc/apache2/sites-enabled/
+      - /etc/apache2/sites-available/
+    file_type: any
+  register: files_to_delete
+
+- name: Remove default virtual host
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  with_items: "{{ files_to_delete.files }}"
+
+- name: Site virtual host
+  template:
+    src: site.conf.j2
+    dest: /etc/apache2/sites-available/site.conf
+
+- name: Site virtual host, symbolic link
+  file:
+    src: /etc/apache2/sites-available/site.conf
+    dest: /etc/apache2/sites-enabled/site.conf
+    state: link
+
+- name: Apache state (start on boot)
+  service:
+    name: apache2
+    state: started
+    enabled: true

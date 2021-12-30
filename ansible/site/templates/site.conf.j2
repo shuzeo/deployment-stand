@@ -1,0 +1,8 @@
+<VirtualHost *:80>
+        ServerAdmin webmaster@localhost
+        DocumentRoot {{ sites_directory }}/site
+        DirectoryIndex index.php
+
+        ErrorLog ${APACHE_LOG_DIR}/site_error.log
+        CustomLog ${APACHE_LOG_DIR}/site_access.log combined
+</VirtualHost>

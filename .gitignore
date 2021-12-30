@@ -1,0 +1,7 @@
+.idea
+data
+master/ssh
+app/ssh/authorized_keys
+postgresql/ssh/authorized_keys
+.env
+*.iml
