@@ -1,0 +1,12 @@
+---
+
+- name: Create site directory
+  file:
+    path: "{{ sites_directory }}/site/"
+    state: directory
+
+- name: Copying index file for site
+  get_url:
+    url: "{{ site_index_url }}"
+    dest: "{{ sites_directory }}/site/"
+    mode: '0644'

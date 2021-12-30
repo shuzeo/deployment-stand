@@ -1,0 +1,10 @@
+---
+
+- name: Show date on servers
+  shell: date
+  register: result
+
+- name: Result
+  debug:
+    var: result.stdout_lines[0]
+    verbosity: 0

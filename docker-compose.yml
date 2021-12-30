@@ -1,0 +1,43 @@
+version: "3.9"
+services:
+
+  master:
+    env_file:
+      - .env
+    container_name: "${CON_NAME_PFX}_master"
+    build: ./master
+    networks:
+      network-one:
+        ipv4_address: 172.103.0.100
+    volumes:
+      - ./data/jenkins:/var/jenkins
+      - ./ansible:/var/ansible
+      - "$SSH_AUTH_SOCK:/ssh-agent"
+
+  app:
+    env_file:
+      - .env
+    privileged: "${PRIVILEGED}"
+    container_name: "${CON_NAME_PFX}_app"
+    build: ./app
+    networks:
+      network-one:
+        ipv4_address: 172.103.0.101
+
+  postgresql:
+    env_file:
+      - .env
+    privileged: "${PRIVILEGED}"
+    container_name: "${CON_NAME_PFX}_postgresql"
+    build: ./postgresql
+    networks:
+      network-one:
+        ipv4_address: 172.103.0.102
+    volumes:
+      - ./data/postgresql:/var/postgresql
+
+networks:
+  network-one:
+    ipam:
+      config:
+        - subnet: 172.103.0.0/24

@@ -1,0 +1,13 @@
+---
+
+- name: Checking availability servers
+  hosts: all
+  remote_user: root
+  roles:
+    - common
+
+- name: Configure app server
+  hosts: app
+  remote_user: root
+  roles:
+    - app
