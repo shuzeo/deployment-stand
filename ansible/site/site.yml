@@ -1,6 +1,6 @@
 ---
 
-- name: Checking availability servers
+- name: Checking servers date
   hosts: all
   remote_user: root
   roles:
@@ -11,3 +11,9 @@
   remote_user: root
   roles:
     - app
+
+- name: Configure postgresql server
+  hosts: postgresql
+  remote_user: root
+  roles:
+    - postgresql

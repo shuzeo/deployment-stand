@@ -29,7 +29,7 @@ services:
       - .env
     privileged: "${PRIVILEGED}"
     container_name: "${CON_NAME_PFX}_postgresql"
-    build: ./postgresql
+    build: ./app
     networks:
       network-one:
         ipv4_address: 172.103.0.102
