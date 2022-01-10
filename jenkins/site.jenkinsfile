@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+    options {
+        disableConcurrentBuilds()
+        timestamps()
+    }
+    stages {
+        stage('Deploy site') {
+            steps {
+                deploySite()
+            }
+        }
+    }
+    post {
+        always {
+            alwaysMessage()
+        }
+        success {
+            successMessage()
+        }
+        failure {
+            failureMessage()
+        }
+    }
+}
+
+def deploySite() {
+    dir('git') {
+        git branch: 'main', url: 'https://github.com/shuzeo/deployment-stand.git'
+    }
+    dir('git/ansible/site') {
+        sh 'ansible-playbook -i develop site.yml'
+    }
+}
+
+def alwaysMessage() {
+    echo "alwaysMessage"
+}
+
+def successMessage() {
+    echo "successMessage"
+}
+
+def failureMessage() {
+    echo "failureMessage"
+}
