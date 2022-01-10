@@ -25,8 +25,10 @@ pipeline {
 }
 
 def deploySite() {
-    git branch: 'main', url: 'https://github.com/shuzeo/deployment-stand.git'
-    dir('ansible/site') {
+    dir('deployment-stand') {
+        git branch: 'main', url: 'https://github.com/shuzeo/deployment-stand.git'
+    }
+    dir('deployment-stand/ansible/site') {
         sh 'ansible-playbook -i develop site.yml'
     }
 }
