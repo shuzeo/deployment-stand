@@ -42,9 +42,13 @@ RUN apt-get install -y \
 
 # ssh
 COPY ssh/* /root/.ssh/
+COPY ssh/* /var/lib/jenkins/.ssh/
 
 # set rights, start jenkins and enless sleep for continuation work
-CMD chmod 600 ~/.ssh/*; \
+CMD chmod 644 /var/lib/jenkins/.ssh/id_rsa.pub;  \
+    chmod 600 /var/lib/jenkins/.ssh/id_rsa; \
+    chmod 700 /var/lib/jenkins/.ssh/; \
+    chown -R jenkins:jenkins /var/lib/jenkins/; \
     chmod -R 775 /var/jenkins; \
     chown -R jenkins:jenkins /var/jenkins; \
     service jenkins start; \

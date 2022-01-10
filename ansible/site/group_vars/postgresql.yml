@@ -1,0 +1,7 @@
+---
+
+database_version: 9.6
+database_name: site
+database_user_name: admin
+database_user_password: 123
+host_mask: 172.103.0.1/24

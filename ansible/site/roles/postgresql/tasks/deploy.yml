@@ -1,2 +1,18 @@
 ---
 
+- name: Prepare database
+  template:
+    src: db_create.sql
+    dest: /var/postgresql/{{ database_name }}_db_create.sql
+    owner: postgres
+    group: postgres
+    mode: '0644'
+
+- name: Execute file
+  command: su - postgres -c "psql -f /var/postgresql/{{ database_name }}_db_create.sql"
+  register: result
+
+- name: Result
+  debug:
+    var: result.stdout_lines
+    verbosity: 0
