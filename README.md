@@ -19,3 +19,20 @@ Parameter "privileged" gives access to all devices on the host system, it is not
 **Jenkins panel:**
 
     http://172.103.0.100:8080/
+    
+## deploy site    
+
+**Add pipeline and run**
+
+    - http://172.103.0.100:8080/
+    - new item
+    - pipeline
+        - definition: SCM
+        - SCM: Git
+            - url: https://github.com/shuzeo/deployment-stand.git
+            - branch: */main
+            - script: jenkins/site.jenkinsfile
+            
+**Open site**
+
+    http://172.103.0.101/            
