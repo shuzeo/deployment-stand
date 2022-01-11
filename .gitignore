@@ -5,3 +5,4 @@ app/ssh/authorized_keys
 postgresql/ssh/authorized_keys
 .env
 *.iml
+*.password
