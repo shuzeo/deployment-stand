@@ -22,16 +22,6 @@ Parameter "privileged" gives access to all devices on the host system, it is not
     
 ## deploy site    
 
-**Add vault file-password**
-
-    echo 'password' > ansible/site/vault.password
-    
-For change password use `ansible-vault rekey`  
-For decrypt use `ansible-vault decrypt`  
-For encrypt use `ansible-vault encrypt`  
-For view use `ansible-vault view`  
-For edit use `ansible-vault edit`
-
 **Add pipeline and run**
 
     - http://172.103.0.100:8080/
@@ -42,6 +32,19 @@ For edit use `ansible-vault edit`
             - url: https://github.com/shuzeo/deployment-stand.git
             - branch: */main
             - script: jenkins/site.jenkinsfile
+
+**Add vault file-password**
+
+    sudo docker exec -it \
+    $(sudo docker ps --format '{{.Names}}' | grep deployment-stand_master) \
+    su jenkins bash -c 'dir=/var/jenkins/workspace/site/deployment-stand/ansible/site/; \
+    mkdir -p $dir; echo "password" > $dir/vault.password'
+    
+Change password: `ansible-vault rekey`  
+Decrypt: `ansible-vault decrypt`  
+Encrypt: `ansible-vault encrypt`  
+View: `ansible-vault view`  
+Edit: `ansible-vault edit`
             
 **Open site**
 
