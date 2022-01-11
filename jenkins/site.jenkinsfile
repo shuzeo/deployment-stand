@@ -29,7 +29,7 @@ def deploySite() {
         git branch: 'main', url: 'https://github.com/shuzeo/deployment-stand.git'
     }
     dir('deployment-stand/ansible/site') {
-        sh 'ansible-playbook -i develop site.yml'
+        sh 'ansible-playbook -i develop site.yml --vault-password-file=vault.password'
     }
 }
 
